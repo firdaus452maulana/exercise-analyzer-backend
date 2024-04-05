@@ -10,7 +10,8 @@ api = Api(app)
 def hello():
     if request.method == "POST":
         file = request.files.get('file')
-        data = loads(file.read().decode('utf8'))
-        print(type(data))
-        return str(data[0])
+        data = loads(file.read())
+        # print(data[0])
+        # print(type(data))
+        return render_template('show.html', data=data)
     return render_template('index.html')

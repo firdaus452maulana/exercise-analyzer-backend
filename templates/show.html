@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>-->
+    {% for item in data %}
+    <ul>
+        <li>{{item.repetition}}</li>
+        <li>{{item.state}}</li>
+        <li>{{item.feedbacks}}</li>
+    </ul>
+    {% endfor %}
+{% endblock %}
