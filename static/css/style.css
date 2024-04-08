@@ -40,8 +40,8 @@ body
   &.green
     background: #27ae60
   
-  &.blue
-    background: #2980b9
+  &.yellow
+    background: #FFFF8F
    
   @media screen and (max-width: 580px)
     padding: 14px 0 7px

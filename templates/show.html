@@ -1,12 +1,37 @@
 {% extends 'base.html' %}
 
+
+<h1>{% block title %} Your Squats Feedback here {% endblock %}</h1>
+
 {% block content %}
-<!--    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>-->
-    {% for item in data %}
-    <ul>
-        <li>{{item.repetition}}</li>
-        <li>{{item.state}}</li>
-        <li>{{item.feedbacks}}</li>
-    </ul>
-    {% endfor %}
+    <div class="wrapper">
+        {% for item in data.data %}
+        <table class="table table-hover">
+            <thead>
+                {% if item.state=='FAILED' %}
+                <tr class="table-danger">
+                {% elif item.state=='CORRECT' %}
+                <tr class="table-success">
+                {% else %}
+                <tr class="table-warning">
+                {% endif %}
+                  <th scope="col">
+                      Repetition - {{item.repetition+1}}
+                  </th>
+                  <th scope="col">
+                      {{item.state}}
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in item.feedbacks %}
+                <tr>
+                  <td><img src="data:image/jpg;base64, {{feedback.img_64}}" /></td>
+                  <td>{{feedback.feedback}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
 {% endblock %}
