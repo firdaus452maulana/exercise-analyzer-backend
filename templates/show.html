@@ -24,10 +24,18 @@
                 </tr>
             </thead>
             <tbody>
+                {% if item.state=='FAILED' %}
+                <tr>
+                  <td>Your squat movement is not perfect</td>
+                  <td>You don't lower your hips enough when doing squats</td>
+                  <td>To perfect the squat and get results from the squat exercise, you need to bring your torso and hips until your thighs are in a position that is parallel to your knees. Do this as you would if you were sitting in a chair.</td>
+                </tr>
+                {% endif %}
                 {% for feedback in item.feedbacks %}
                 <tr>
                   <td><img src="data:image/jpg;base64, {{feedback.img_64}}" /></td>
-                  <td>{{feedback.feedback}}</td>
+                  <td>{{data.feedback_db[feedback.feedback][0]}}</td>
+                  <td>{{data.feedback_db[feedback.feedback][1]}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

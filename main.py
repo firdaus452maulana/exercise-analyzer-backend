@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from flask_restful import Api, Resource
 from json import loads
 
+from dictionary_feedback import get_feedback_words
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -13,7 +15,7 @@ def home():
         data = loads(file.read())
         data_update = {
             "data": data,
-            "feedback_db": "test"
+            "feedback_db": get_feedback_words()
         }
         # print(data[0])
         # print(type(data))
