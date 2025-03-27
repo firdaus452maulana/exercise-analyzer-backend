@@ -4,13 +4,13 @@ FROM python:3.10-slim
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
-RUN pip install flask firebase-admin python-dotenv
+# Copy the application code into the container
+COPY . /app
 
-# Copy all Python files
-COPY *.py ./
+# Install dependencies
+RUN pip install --no-cache-dir flask flask_restful firebase-admin python-dotenv openai
 
 EXPOSE 4025
 
 # Run the application
-CMD ["python", "main.py"]
+CMD ["python", "main.py", "--port", "4025"]
