@@ -2,36 +2,14 @@ from flask import Flask, render_template, request
 from flask_restful import Api, Resource
 import json
 import ast
-import os
 
 from dictionary_feedback_2 import get_feedback_words
 from llm_run import getOutputLLM
 from firestore_service import save_personalization, save_perform, save_evaluation, get_analysis
-from dotenv import load_dotenv
 
 app = Flask(__name__)
 api = Api(app)
 
-load_dotenv()
-
-service_account_key = {
-    "type": os.getenv("FIREBASE_TYPE"),
-    "project_id": os.getenv("FIREBASE_PROJECT_ID"),
-    "private_key_id": os.getenv("FIREBASE_PRIVATE_KEY_ID"),
-    "private_key": os.getenv("FIREBASE_PRIVATE_KEY"),
-    "client_email": os.getenv("FIREBASE_CLIENT_EMAIL"),
-    "client_id": os.getenv("FIREBASE_CLIENT_ID"),
-    "auth_uri": os.getenv("FIREBASE_AUTH_URI"),
-    "token_uri": os.getenv("FIREBASE_TOKEN_URI"),
-    "auth_provider_x509_cert_url": os.getenv("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"),
-    "client_x509_cert_url": os.getenv("FIREBASE_CLIENT_X509_CERT_URL"),
-    "universe_domain": os.getenv("FIREBASE_UNIVERSE_DOMAIN")
-}
-print(service_account_key)
-print(os.getenv("FIREBASE_PRIVATE_KEY"))
-print(os.getenv("FIREBASE_PRIVATE_KEY").replace("\n", "\n"))
-print(os.getenv("FIREBASE_PRIVATE_KEY").replace('\\n', "\n"))
-print(os.getenv("FIREBASE_PRIVATE_KEY").replace("\\\n", "\n"))
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def home():
@@ -57,7 +35,6 @@ def home():
             if item['state'] == 'FAILED':
                 item['feedbacks'].append(failed)
 
-        print(words)
         save_perform({"analysis": str(data)})
         # print(data[0])
         # print(type(data))

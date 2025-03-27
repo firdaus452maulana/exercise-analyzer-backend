@@ -87,7 +87,7 @@ ONLY OUTPUT RAW JSON. Use this structure:
         data = json.loads(response.choices[0].message.content)
         data['type'] = type
 
-        # save_feedback(exercise_id=exercise_id, data=data)
+        save_feedback(exercise_id=exercise_id, data=data)
 
         return json.loads(response.choices[0].message.content)
         # return response.choices[0].message.content
