@@ -24,8 +24,13 @@ def initialize_firebase():
         firebase_admin.initialize_app(cred)
 
 def save_perform(data):
+    print("1")
+    print(os.getenv("FIREBASE_TYPE"))
+    print(os.getenv("FIREBASE_PRIVATE_KEY"))
     initialize_firebase()
+    print("2")
     db = firestore.client()
+    print("3")
     doc_ref = db.collection('exercise').document()
     doc_ref.set(data)
     return doc_ref.id

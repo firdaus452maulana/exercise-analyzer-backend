@@ -35,6 +35,7 @@ def home():
             if item['state'] == 'FAILED':
                 item['feedbacks'].append(failed)
 
+        print(words)
         save_perform({"analysis": str(data)})
         # print(data[0])
         # print(type(data))
