@@ -47,7 +47,7 @@ def home():
         analysis = get_analysis(exerciseId)
         return json.dumps(ast.literal_eval(analysis["analysis"]), indent=2)
 
-    return render_template('index.html')
+    # return render_template('index.html')
 
 @app.route('/llm-feedback', methods=['GET'], strict_slashes=False)
 def callLlm():
