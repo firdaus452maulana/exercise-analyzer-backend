@@ -77,20 +77,23 @@ ONLY OUTPUT RAW JSON. Use this structure:
         messages = [{"role": "user", "content": system_prompt}]
 
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek-reasoner",
             messages=messages,
-            response_format={
-                'type': 'json_object'
-            }
+            # response_format={
+            #     'type': 'json_object'
+            # }
         )
 
-        data = json.loads(response.choices[0].message.content)
-        data['type'] = type
+        # data = json.loads(response.choices[0].message.content)
+        # data['type'] = type
 
-        save_feedback(exercise_id=exercise_id, data=data)
+        # save_feedback(exercise_id=exercise_id, data=data)
 
-        return json.loads(response.choices[0].message.content)
-        # return response.choices[0].message.content
+        # return json.loads(response.choices[0].message.content)
+        cleaned_json_string = response.choices[0].message.content.strip("```json").strip("```").strip()
+        # print(response.choices[0].message.content)
+        # print(json.loads(cleaned_json_string))
+        return json.loads(cleaned_json_string)
 
 
 
