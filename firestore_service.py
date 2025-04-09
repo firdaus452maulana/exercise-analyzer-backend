@@ -51,7 +51,7 @@ def get_personalization(exercise_id, personalization_id=None):
     else:
         # Get all personalization documents
         docs = personalization_collection.get()
-        return docs[0].to_dict()
+        return docs[0].to_dict() if len(docs) > 0 else None
 
 # def save_evaluation(data):
 #     initialize_firebase()

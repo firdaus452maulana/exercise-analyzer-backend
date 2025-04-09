@@ -5,7 +5,7 @@ import ast
 
 from dictionary_feedback_2 import get_feedback_words
 from llm_run import getOutputLLM
-from firestore_service import save_personalization, save_perform, save_evaluation, get_analysis
+from firestore_service import save_personalization, save_perform, save_evaluation, get_analysis, get_personalization
 
 app = Flask(__name__)
 api = Api(app)
@@ -79,6 +79,14 @@ def handle_perform():
         return {'error': 'No JSON data provided'}, 400
     doc_id = save_evaluation(exerciseId, type, data)
     return {'id': doc_id}, 201
+
+@app.route('/get-personalization', methods=['GET'])
+def personalization():
+    exercise_id = request.args.get('exerciseId')
+    data = get_personalization(exercise_id)
+    if data is None:
+        return {'error': 'Personalization data not found'}, 404
+    return data
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=4025, debug=True)
